@@ -1,5 +1,8 @@
 # scrycli
+[![PyPI](https://img.shields.io/pypi/l/scrycli.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/PolarPayne/scrycli.svg?branch=master)](https://travis-ci.org/PolarPayne/scrycli)
+[![PyPI](https://img.shields.io/pypi/v/scrycli.svg)](https://pypi.python.org/pypi/scrycli)
+[![PyPI](https://img.shields.io/pypi/pyversions/scrycli.svg)]()
 
 ## Installation
 Install through pip with `pip install scrycli`.
