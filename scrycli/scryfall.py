@@ -18,9 +18,15 @@ class Scryfall:
 
     API_URL = "https://api.scryfall.com"
     USER_AGENT = (
-        f"scrycli/{__version__} (github.com/polarpayne/scrycli) "
-        f"requests/{requests.__version__} "
-        f"python/{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+        "scrycli/{} (github.com/polarpayne/scrycli) "
+        "requests/{} "
+        "python/{}.{}.{}"
+    ).format(
+        __version__,
+        requests.__version__,
+        sys.version_info.major,
+        sys.version_info.minor,
+        sys.version_info.micro
     )
     SLEEP = 0.1
 
@@ -41,7 +47,7 @@ class Scryfall:
         elif response.status_code == 429:
             raise self.TooManyRequests("too many requests")
         else:
-            raise self.APIError(f"API returned status code {response.status_code}.")
+            raise self.APIError("API returned status code " + response.status_code)
 
     def _get_url(self, url, params=None):
         if params is None:
@@ -56,7 +62,7 @@ class Scryfall:
             params = {}
 
         return self._check(
-            self._r.get(f"{self.API_URL}{api}", params=params)
+            self._r.get(self.API_URL + api, params=params)
         )
 
     def search(self, q, order):
