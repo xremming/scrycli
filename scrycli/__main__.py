@@ -25,6 +25,12 @@ def main():
         help="force tty printing off"
     )
 
+    parser.add_argument(
+        "--urls", "-u",
+        action="store_true",
+        help="show urls to cards"
+    )
+
     # TODO
     # card_info = parser.add_mutually_exclusive_group()
     # card_info.add_argument(
@@ -131,7 +137,7 @@ def main():
     if args.tty is not None:
         isatty = args.tty
 
-    api = Scryfall(isatty)
+    api = Scryfall(isatty, args.urls)
 
     try:
         if args.command == "search":

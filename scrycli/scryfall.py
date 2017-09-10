@@ -29,9 +29,10 @@ class Scryfall:
     )
     SLEEP = 0.1
 
-    def __init__(self, isatty=False):
+    def __init__(self, isatty=False, urls=False):
         self.card_kwargs = {
-            "isatty": isatty
+            "isatty": isatty,
+            "urls": urls
         }
 
         self._r = requests.session()
@@ -100,8 +101,9 @@ class ScryfallCard:
 
     class CardFace:
 
-        def __init__(self, data, isatty=False):
+        def __init__(self, data, isatty=False, urls=False):
             self.isatty = isatty
+            self.urls = urls
 
             self.name = data["name"]
             self.mana_cost = data.get("mana_cost", None)
@@ -123,11 +125,14 @@ class ScryfallCard:
                 out.append(self.power + "/" + self.toughness)
             if self.loyalty:
                 out.append(self.loyalty)
+            if self.urls:
+                out.append(self.url)
 
             return "\n".join(out)
 
-    def __init__(self, data, isatty=False):
+    def __init__(self, data, isatty=False, urls=False):
         self.isatty = isatty
+        self.urls = urls
 
         self._data = data
         self.name = data["name"]
@@ -143,7 +148,7 @@ class ScryfallCard:
 
         self.card_faces = []
         for face in data.get("card_faces", []):
-            self.card_faces.append(self.CardFace(face, isatty=isatty))
+            self.card_faces.append(self.CardFace(face, isatty, urls))
 
     def __str__(self):
         if len(self.card_faces) > 0:
@@ -163,6 +168,8 @@ class ScryfallCard:
             out.append(self.power + "/" + self.toughness)
         if self.loyalty:
             out.append(self.loyalty)
+        if self.urls:
+            out.append(self.url)
 
         return "\n".join(out)
 
