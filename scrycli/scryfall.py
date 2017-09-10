@@ -89,7 +89,7 @@ class Scryfall:
 
     def random(self, count=1):
         for _ in range(count):
-            yield ScryfallCard(self._get("/cards/random", **self.card_kwargs))
+            yield ScryfallCard(self._get("/cards/random"), **self.card_kwargs)
             time.sleep(self.SLEEP)
 
 
