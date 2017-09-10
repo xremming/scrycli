@@ -102,7 +102,8 @@ def main():
     named = subparsers.add_parser("named")
     named.add_argument(
         "--exact", "-e",
-        action="store_true"
+        action="store_true",
+        help="no fuzzy matching"
     )
     named.add_argument(
         "query",
