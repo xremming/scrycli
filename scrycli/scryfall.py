@@ -39,9 +39,12 @@ class Scryfall:
         else:
             raise self.APIError(f"API returned status code {response.status_code}.")
 
-    def _get_url(self, url):
+    def _get_url(self, url, params=None):
+        if params is None:
+            params = {}
+
         return self._check(
-            self._r.get(url)
+            self._r.get(url, params=params)
         )
 
     def _get(self, api, params=None):
@@ -52,8 +55,8 @@ class Scryfall:
             self._r.get(f"{self.API_URL}{api}", params=params)
         )
 
-    def search(self, q):
-        data = self._get("/cards/search", params={"q": q})
+    def search(self, q, order):
+        data = self._get("/cards/search", params={"q": q, "order": order})
 
         yield from (ScryfallCard(card) for card in data["data"])
 

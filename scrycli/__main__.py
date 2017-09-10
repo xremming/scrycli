@@ -60,7 +60,28 @@ def main():
     )
 
     search = subparsers.add_parser("search")
-    search.add_argument("query", nargs=argparse.REMAINDER)
+    search.add_argument(
+        "--order", "-o",
+        choices=[
+            "name",
+            "set",
+            "tix",
+            "usd",
+            "eur",
+            "cmc",
+            "pow",
+            "tou",
+            "rarity",
+            "color"
+        ],
+        default="name",
+        help="order in which to sort the results"
+    )
+    search.add_argument(
+        "query",
+        nargs=argparse.REMAINDER,
+        help="query arguments, for help see https://scryfall.com/docs/reference"
+    )
 
     random = subparsers.add_parser("random")
     random.add_argument(
@@ -77,7 +98,7 @@ def main():
 
     try:
         if args.command == "search":
-            for i in api.search(" ".join(args.query)):
+            for i in api.search(" ".join(args.query), args.order):
                 print("---")
                 print(i)
         elif args.command == "random":
