@@ -1,4 +1,3 @@
-from pprint import pprint
 import json
 import time
 import sys
@@ -110,6 +109,7 @@ class ScryfallCard:
             self.oracle_text = data.get("oracle_text", None)
             self.power = data.get("power", None)
             self.toughness = data.get("toughness", None)
+            self.loyalty = data.get("loyalty", None)
 
         def __str__(self):
             out = []
@@ -121,6 +121,8 @@ class ScryfallCard:
                 out.append(self.oracle_text)
             if self.power and self.toughness:
                 out.append(self.power + "/" + self.toughness)
+            if self.loyalty:
+                out.append(self.loyalty)
 
             return "\n".join(out)
 
@@ -135,6 +137,7 @@ class ScryfallCard:
         self.flavor_text = data.get("flavor_text", None)
         self.power = data.get("power", None)
         self.toughness = data.get("toughness", None)
+        self.loyalty = data.get("loyalty", None)
 
         self.card_faces = []
         for face in data.get("card_faces", []):
@@ -156,6 +159,8 @@ class ScryfallCard:
             out.append(italic(self.flavor_text, self.isatty))
         if self.power and self.toughness:
             out.append(self.power + "/" + self.toughness)
+        if self.loyalty:
+            out.append(self.loyalty)
 
         return "\n".join(out)
 
