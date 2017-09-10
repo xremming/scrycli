@@ -8,6 +8,22 @@ from .scryfall import Scryfall
 def main():
     parser = argparse.ArgumentParser("scrycli")
 
+    tty = parser.add_mutually_exclusive_group()
+    tty.add_argument(
+        "--tty",
+        action="store_true",
+        default=None,
+        dest="tty",
+        help="force tty printing on (italics etc.)"
+    )
+    tty.add_argument(
+        "--no-tty",
+        action="store_false",
+        default=None,
+        dest="tty",
+        help="force tty printing off"
+    )
+
     # TODO
     # card_info = parser.add_mutually_exclusive_group()
     # card_info.add_argument(
@@ -94,7 +110,11 @@ def main():
 
     args = parser.parse_args()
 
-    api = Scryfall()
+    isatty = sys.stdout.isatty()
+    if args.tty is not None:
+        isatty = args.tty
+
+    api = Scryfall(isatty)
 
     try:
         if args.command == "search":
