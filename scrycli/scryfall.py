@@ -139,6 +139,8 @@ class ScryfallCard:
         self.toughness = data.get("toughness", None)
         self.loyalty = data.get("loyalty", None)
 
+        self.url = data.get("scryfall_uri", None)
+
         self.card_faces = []
         for face in data.get("card_faces", []):
             self.card_faces.append(self.CardFace(face, isatty=isatty))

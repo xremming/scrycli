@@ -1,3 +1,4 @@
+import webbrowser
 import argparse
 import time
 import sys
@@ -106,6 +107,11 @@ def main():
         help="no fuzzy matching"
     )
     named.add_argument(
+        "--open", "-o",
+        action="store_true",
+        help="open the card in browser"
+    )
+    named.add_argument(
         "query",
         nargs=argparse.REMAINDER
     )
@@ -133,7 +139,10 @@ def main():
                 print("---")
                 print(i)
         elif args.command == "named":
-            print(api.named(" ".join(args.query), args.exact))
+            card = api.named(" ".join(args.query), args.exact)
+            print(card)
+            if args.open:
+                webbrowser.open(card.url)
         elif args.command == "random":
             for i in api.random(args.count):
                 print("---")
