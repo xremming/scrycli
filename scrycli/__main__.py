@@ -99,6 +99,16 @@ def main():
         help="query arguments, for help see https://scryfall.com/docs/reference"
     )
 
+    named = subparsers.add_parser("named")
+    named.add_argument(
+        "--exact", "-e",
+        action="store_true"
+    )
+    named.add_argument(
+        "query",
+        nargs=argparse.REMAINDER
+    )
+
     random = subparsers.add_parser("random")
     random.add_argument(
         "count",
@@ -121,6 +131,8 @@ def main():
             for i in api.search(" ".join(args.query), args.order):
                 print("---")
                 print(i)
+        elif args.command == "named":
+            print(api.named(" ".join(args.query), args.exact))
         elif args.command == "random":
             for i in api.random(args.count):
                 print("---")

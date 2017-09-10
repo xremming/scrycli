@@ -47,7 +47,7 @@ class Scryfall:
         elif response.status_code == 429:
             raise self.TooManyRequests("too many requests")
         else:
-            raise self.APIError("API returned status code " + response.status_code)
+            raise self.APIError("API returned status code " + str(response.status_code))
 
     def _get_url(self, url, params=None):
         if params is None:
@@ -78,6 +78,14 @@ class Scryfall:
             more = data.get("has_more", False)
             next_page = data.get("next_page", None)
             yield from (ScryfallCard(card, **self.card_kwargs) for card in data["data"])
+
+    def named(self, name, exact=False):
+        params = {"fuzzy": name}
+        if exact:
+            params = {"exact": name}
+
+        return ScryfallCard(self._get("/cards/named", params=params), **self.card_kwargs)
+
 
     def random(self, count=1):
         for _ in range(count):
