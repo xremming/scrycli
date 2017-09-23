@@ -7,8 +7,9 @@ python:
   - "3.7-dev"
   - "nightly"
 install:
-  - pip install -r requirements.txt
+  - pip install pipenv
+  - pipenv install
 script:
-  - python -m scrycli search jace vryn
-  - python -m scrycli named jace vryn
-  - python -m scrycli random 2
+  - pipenv run python -m scrycli search jace vryn
+  - pipenv run python -m scrycli named jace vryn
+  - pipenv run python -m scrycli random 2
