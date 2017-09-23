@@ -136,7 +136,7 @@ class ScryfallCard:
 
         self._data = data
         self.name = data["name"]
-        self.mana_cost = data["mana_cost"]
+        self.mana_cost = data.get("mana_cost", None)
         self.type_line = data.get("type_line", None)
         self.oracle_text = data.get("oracle_text", None)
         self.flavor_text = data.get("flavor_text", None)
