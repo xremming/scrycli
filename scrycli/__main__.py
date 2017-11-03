@@ -2,11 +2,57 @@ import webbrowser
 import argparse
 import time
 import sys
+import os
 
-from .scryfall import Scryfall
+SORT_OPTS = [
+    "name",
+    "set",
+    "tix",
+    "usd",
+    "eur",
+    "cmc",
+    "pow",
+    "tou",
+    "rarity",
+    "color",
+    "edhrec"
+]
+
+def autocomplete(shell, args):
+    cmd = args[0].strip()
+    cur = args[1].strip()
+    prev = args[2].strip()
+
+    if prev in ("-s", "--sort"):
+        opts = SORT_OPTS
+    elif prev == cmd:
+        opts = ["search", "named", "random", "--tty", "--no-tty", "--urls"]
+    elif prev == "search":
+        opts = ["--sort"]
+    elif prev in ("named", "--exact", "--open"):
+        opts = ["--exact", "--open"]
+    else:
+        opts = []
+
+    opts = filter(lambda s: s.startswith(cur), opts)
+    print(*opts, sep="\n")
+
+
+def do_complete(shell):
+    if shell == "bash":
+        print("complete -o nosort -C '_SCRYCLI_COMPLETE=source-bash python -m scrycli' scrycli")
+    return 0
 
 
 def main():
+    scrycli_complete = os.environ.get("_SCRYCLI_COMPLETE", "")
+    if scrycli_complete.startswith("source-"):
+        shell = scrycli_complete[len("source-"):]
+        if len(sys.argv) > 1:
+            return autocomplete(shell, sys.argv[1:])
+        return do_complete(shell)
+
+    from .scryfall import Scryfall
     parser = argparse.ArgumentParser("scrycli")
 
     tty = parser.add_mutually_exclusive_group()
@@ -85,19 +131,7 @@ def main():
     search = subparsers.add_parser("search")
     search.add_argument(
         "--sort", "-s",
-        choices=[
-            "name",
-            "set",
-            "tix",
-            "usd",
-            "eur",
-            "cmc",
-            "pow",
-            "tou",
-            "rarity",
-            "color",
-            "edhrec"
-        ],
+        choices=SORT_OPTS,
         default="name",
         help="order in which to sort the results"
     )
