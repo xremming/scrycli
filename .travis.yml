@@ -15,3 +15,4 @@ script:
 - pipenv run python -m scrycli search jace vryn
 - pipenv run python -m scrycli named jace vryn
 - pipenv run python -m scrycli random 2
+- _SCRYCLI_COMPLETE=source-bash pipenv run python -m scrycli
