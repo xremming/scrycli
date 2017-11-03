@@ -84,7 +84,7 @@ def main():
 
     search = subparsers.add_parser("search")
     search.add_argument(
-        "--order", "-o",
+        "--sort", "-s",
         choices=[
             "name",
             "set",
@@ -142,7 +142,7 @@ def main():
 
     try:
         if args.command == "search":
-            for i in api.search(" ".join(args.query), args.order):
+            for i in api.search(" ".join(args.query), args.sort):
                 print("---")
                 print(i)
         elif args.command == "named":
