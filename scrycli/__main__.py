@@ -40,7 +40,7 @@ def autocomplete(shell, args):
 
 def do_complete(shell):
     if shell == "bash":
-        print("complete -o nosort -C '_SCRYCLI_COMPLETE=source-bash python -m scrycli' scrycli")
+        print("complete -o nosort -C '_SCRYCLI_COMPLETE=source-bash scrycli' scrycli")
     return 0
 
 
