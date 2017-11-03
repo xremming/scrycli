@@ -156,9 +156,11 @@ def main():
         else:
             parser.print_help()
             return 1
+    except api.APIError:
+        return 2
     except api.TooManyRequests:
         time.sleep(1)
-        return 2
+        return 3
 
 
 if __name__ == "__main__":
