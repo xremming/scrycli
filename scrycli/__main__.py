@@ -95,7 +95,8 @@ def main():
             "pow",
             "tou",
             "rarity",
-            "color"
+            "color",
+            "edhrec"
         ],
         default="name",
         help="order in which to sort the results"
