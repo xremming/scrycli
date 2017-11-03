@@ -159,6 +159,7 @@ def main():
     except api.APIError:
         return 2
     except api.TooManyRequests:
+        print("too many requests\nif you're running scrycli parallelized, don't", file=sys.stderr)
         time.sleep(1)
         return 3
 
