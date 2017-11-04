@@ -14,5 +14,9 @@ install:
 script:
 - pipenv run python -m scrycli search jace vryn
 - pipenv run python -m scrycli named jace vryn
+- pipenv run python -m scrycli random
 - pipenv run python -m scrycli random 2
+- pipenv run python -m scrycli set
+- pipenv run python -m scrycli set zen
+- pipenv run python -m scrycli catalog card-names
 - _SCRYCLI_COMPLETE=source-bash pipenv run python -m scrycli
