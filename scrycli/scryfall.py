@@ -97,6 +97,9 @@ class Scryfall:
             yield ScryfallCard(self._get("/cards/random"), **self.card_kwargs)
             time.sleep(self.SLEEP)
 
+    def catalog(self, what):
+        return self._get("/catalog/" + what)["data"]
+
 
 class ScryfallCard:
 

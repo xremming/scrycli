@@ -18,6 +18,19 @@ SORT_OPTS = [
     "edhrec"
 ]
 
+CATALOG_OPTS = [
+    "card-names",
+    "word-bank",
+    "creature-types",
+    "planeswalker-types",
+    "land-types",
+    "spell-types",
+    "artifact-types",
+    "powers",
+    "toughnesses",
+    "loyalties"
+]
+
 def autocomplete(shell, args):
     cmd = args[0].strip()
     cur = args[1].strip()
@@ -26,11 +39,13 @@ def autocomplete(shell, args):
     if prev in ("-s", "--sort"):
         opts = SORT_OPTS
     elif prev == cmd:
-        opts = ["search", "named", "random", "--tty", "--no-tty", "--urls"]
+        opts = ["search", "named", "random", "catalog", "--tty", "--no-tty", "--urls"]
     elif prev == "search":
         opts = ["--sort"]
     elif prev in ("named", "--exact", "--open"):
         opts = ["--exact", "--open"]
+    elif prev == "catalog":
+        opts = CATALOG_OPTS
     else:
         opts = []
 
@@ -166,6 +181,9 @@ def main():
         help="amount of random cards to get"
     )
 
+    catalog = subparsers.add_parser("catalog")
+    catalog.add_argument("catalog", choices=CATALOG_OPTS)
+
     args = parser.parse_args()
 
     isatty = sys.stdout.isatty()
@@ -187,6 +205,9 @@ def main():
         elif args.command == "random":
             for i in api.random(args.count):
                 print("---")
+                print(i)
+        elif args.command == "catalog":
+            for i in api.catalog(args.catalog):
                 print(i)
         else:
             parser.print_help()
