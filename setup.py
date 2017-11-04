@@ -5,7 +5,7 @@ from scrycli import __version__
 
 setup(
     name="scrycli",
-    packages=["scrycli"],
+    packages=["scrycli", "scrycli.scryfall"],
     version=__version__,
     description="CLI to Scryfall",
     author="Maximilian Remming",
