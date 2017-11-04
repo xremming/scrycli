@@ -21,4 +21,5 @@ Autocompletion is currently supported only on bash. Enable it by adding
 ## Todo
 * Support for different output formats (start is already in \_\_main\_\_.py)
 * better autocomplete
-* list sets, list cards in set
+  * for search
+  * for set command
