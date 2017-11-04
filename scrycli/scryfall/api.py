@@ -4,6 +4,7 @@ import sys
 import requests
 
 from ..__init__ import __version__
+from .card import ScryfallCard
 
 
 class Scryfall:
