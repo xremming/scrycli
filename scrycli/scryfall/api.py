@@ -5,6 +5,7 @@ import requests
 
 from ..__init__ import __version__
 from .card import ScryfallCard
+from .set import ScryfallSet
 
 
 class Scryfall:
@@ -96,6 +97,24 @@ class Scryfall:
         for _ in range(count):
             yield ScryfallCard(self._get("/cards/random"), **self.card_kwargs)
             time.sleep(self.SLEEP)
+
+    def sets(self, set_code):
+        api = "/sets"
+        if set_code is not None:
+            api += "/" + set_code
+        data = self._get(api)
+        if set_code is None:
+            yield from (ScryfallSet(i) for i in data["data"])
+            more = data.get("has_more", False)
+            next_page = data.get("next_page", None)
+            while more and next_page:
+                time.sleep(self.SLEEP)
+                data = self._get_url(next_page)
+                more = data.get("has_more", False)
+                next_page = data.get("next_page", None)
+                yield from (ScryfallSet(i) for i in data["data"])
+        else:
+            yield ScryfallSet(data)
 
     def catalog(self, what):
         return self._get("/catalog/" + what)["data"]

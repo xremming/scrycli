@@ -39,7 +39,7 @@ def autocomplete(shell, args):
     if prev in ("-s", "--sort"):
         opts = SORT_OPTS
     elif prev == cmd:
-        opts = ["search", "named", "random", "catalog", "--tty", "--no-tty", "--urls"]
+        opts = ["search", "named", "random", "set", "catalog", "--tty", "--no-tty", "--urls"]
     elif prev == "search":
         opts = ["--sort"]
     elif prev in ("named", "--exact", "--open"):
@@ -181,6 +181,9 @@ def main():
         help="amount of random cards to get"
     )
 
+    sets = subparsers.add_parser("set")
+    sets.add_argument("code", nargs="?")
+
     catalog = subparsers.add_parser("catalog")
     catalog.add_argument("catalog", choices=CATALOG_OPTS)
 
@@ -204,6 +207,10 @@ def main():
                 webbrowser.open(card.url)
         elif args.command == "random":
             for i in api.random(args.count):
+                print("---")
+                print(i)
+        elif args.command == "set":
+            for i in api.sets(args.code):
                 print("---")
                 print(i)
         elif args.command == "catalog":
