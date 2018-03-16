@@ -2,7 +2,8 @@
 [![PyPI](https://img.shields.io/pypi/l/scrycli.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/PolarPayne/scrycli.svg?branch=master)](https://travis-ci.org/PolarPayne/scrycli)
 [![PyPI](https://img.shields.io/pypi/v/scrycli.svg)](https://pypi.python.org/pypi/scrycli)
-[![PyPI](https://img.shields.io/pypi/pyversions/scrycli.svg)]()
+[![PyPI](https://img.shields.io/pypi/pyversions/scrycli.svg)][![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FPolarPayne%2Fscrycli.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FPolarPayne%2Fscrycli?ref=badge_shield)
+()
 
 ## What
 CLI for [scryfall](https://scryfall.com/).
@@ -23,3 +24,7 @@ Autocompletion is currently supported only on bash. Enable it by adding
 * better autocomplete
   * for search
   * for set command
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FPolarPayne%2Fscrycli.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FPolarPayne%2Fscrycli?ref=badge_large)
