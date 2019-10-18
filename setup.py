@@ -14,7 +14,7 @@ setup(
     download_url="https://github.com/PolarPayne/scrycli/archive/{}.tar.gz".format(__version__),
     license="MIT",
     install_requires=[
-        "requests==2.18.4"
+        "requests==2.20.0"
     ],
     entry_points={
           'console_scripts': [
